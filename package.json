@@ -5,7 +5,7 @@
   "description": "2048：零依赖纯前端实现，含核心逻辑测试",
   "type": "module",
   "scripts": {
-    "test": "node test/game.test.mjs",
+    "test": "node test/game.test.mjs && node test/ui.test.mjs",
     "serve": "node --version >/dev/null && python -m http.server 2048 --bind 127.0.0.1"
   },
   "license": "MIT"
