@@ -1,0 +1,188 @@
+:root {
+  --bg: #faf8ef;
+  --board: #bbada0;
+  --cell: #cdc1b4;
+  --ink: #776e65;
+  --ink-light: #f9f6f2;
+  --tile-2: #eee4da;
+  --tile-4: #ede0c8;
+  --tile-8: #f2b179;
+  --tile-16: #f59563;
+  --tile-32: #f67c5f;
+  --tile-64: #f65e3b;
+  --tile-128: #edcf72;
+  --tile-256: #edcc61;
+  --tile-512: #edc850;
+  --tile-1024: #edc53f;
+  --tile-2048: #edc22e;
+  --tile-super: #3c3a32;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, "Segoe UI", "Microsoft YaHei", Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.app {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #9c8f82;
+}
+
+.scores { display: flex; gap: 8px; }
+
+.score-box {
+  min-width: 76px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--board);
+  color: var(--ink-light);
+  text-align: center;
+}
+
+.score-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.score-value {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+button {
+  flex: 1;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #8f7a66;
+  color: var(--ink-light);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) { background: #9f8b77; }
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.board-wrap { position: relative; }
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--board);
+  touch-action: none;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  background: var(--cell);
+  font-size: 30px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.tile-2 { background: var(--tile-2); color: var(--ink); }
+.tile-4 { background: var(--tile-4); color: var(--ink); }
+.tile-8 { background: var(--tile-8); color: var(--ink-light); }
+.tile-16 { background: var(--tile-16); color: var(--ink-light); }
+.tile-32 { background: var(--tile-32); color: var(--ink-light); }
+.tile-64 { background: var(--tile-64); color: var(--ink-light); }
+.tile-128 { background: var(--tile-128); color: var(--ink-light); font-size: 26px; }
+.tile-256 { background: var(--tile-256); color: var(--ink-light); font-size: 26px; }
+.tile-512 { background: var(--tile-512); color: var(--ink-light); font-size: 26px; }
+.tile-1024 { background: var(--tile-1024); color: var(--ink-light); font-size: 21px; }
+.tile-2048 { background: var(--tile-2048); color: var(--ink-light); font-size: 21px; }
+.tile-super { background: var(--tile-super); color: var(--ink-light); font-size: 20px; }
+
+.appear { animation: appear 140ms ease-out; }
+.merge { animation: merge 180ms ease-out; }
+
+@keyframes appear {
+  from { transform: scale(0.6); opacity: 0.4; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes merge {
+  0% { transform: scale(1); }
+  55% { transform: scale(1.14); }
+  100% { transform: scale(1); }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 10px;
+  background: rgba(250, 248, 239, 0.86);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.overlay[hidden] { display: none; }
+
+.overlay p { margin: 0; }
+
+.overlay button {
+  flex: 0 0 auto;
+  min-width: 140px;
+}
+
+@media (max-width: 420px) {
+  h1 { font-size: 34px; }
+  .cell { font-size: 24px; }
+  .tile-1024, .tile-2048, .tile-super { font-size: 17px; }
+}
